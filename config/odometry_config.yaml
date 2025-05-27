@@ -1,0 +1,47 @@
+# Camera Parameters
+camera:
+  depth_scale: 1000.0  # Convert from mm to meters
+  depth_trunc: 12.0    # Maximum depth in meters (increased to handle actual depth range)
+  depth_min: 0.3       # Minimum depth in meters
+  depth_max: 12.0      # Maximum depth in meters (increased to handle actual depth range)
+
+# Odometry Parameters
+odometry:
+  # Method can be: "point2point", "point2plane", "hybrid", "hybrid_icp"
+  method: "hybrid"  # Using hybrid method for better accuracy
+  
+  # Feature extraction parameters
+  feature:
+    max_correspondence_distance: 0.2  # Increased for larger movements
+    edge_prune_threshold: 0.25
+    voxel_size: 0.02  # Small voxel size for accurate registration
+    
+  # RGBD Odometry parameters
+  rgbd:
+    depth_diff_max: 0.2   # Increased for larger movements
+    depth_min: 0.3        # Match camera parameters
+    depth_max: 12.0       # Match camera parameters
+    
+  # ICP parameters (used in hybrid_icp mode)
+  icp:
+    max_iteration: 30
+    relative_fitness: 0.000001
+    relative_rmse: 0.000001
+    max_correspondence_distance: 0.1  # Match feature params
+    
+  # Robust kernel parameters
+  kernel:
+    type: "TukeyLoss"  # More robust to outliers
+    scaling_parameter: 0.7
+    
+  # Optimization parameters
+  optimization:
+    maximum_iterations: 50
+    confidence_threshold: 0.7
+    max_correspondence_distance: 0.1  # Match other distance params
+    
+# Visualization Parameters
+visualization:
+  show_correspondence: true
+  show_depth_valid_region: true
+  update_interval: 1  # Update every frame 
